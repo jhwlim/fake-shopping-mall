@@ -1,1 +1,18 @@
+spring:
+  ### datasource
+  datasource:
+    url: # url
+    username: # username
+    password: # password
+    driver-class-name: # driver-class-name
 
+  ### jpa
+  jpa:
+    database: # database
+    open-in-view: off
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
