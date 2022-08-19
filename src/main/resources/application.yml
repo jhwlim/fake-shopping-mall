@@ -16,3 +16,8 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+
+jwt:
+  properties:
+    secret-key: # secret-key
+    expiration-time: # expiration-time
