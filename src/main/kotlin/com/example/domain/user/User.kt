@@ -8,7 +8,7 @@ import javax.persistence.*
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long = 0L,
     val name: String,
     val password: String,
     @Enumerated(EnumType.STRING)

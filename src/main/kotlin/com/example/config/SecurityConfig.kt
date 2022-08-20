@@ -22,6 +22,7 @@ class SecurityConfig {
 
             .authorizeRequests()
             .antMatchers(
+                "/login",
             )
             .permitAll()
             .anyRequest()
