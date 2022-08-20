@@ -19,5 +19,5 @@ spring:
 
 jwt:
   properties:
-    secret-key: # secret-key
-    expiration-time: # expiration-time
+    secret-key: ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 # secret-key
+    expiration-time: 3600 # expiration-time
