@@ -1,7 +1,7 @@
 package com.example.security
 
+import com.example.common.enums.UserRole
 import com.example.config.JwtProperties
-import com.example.domain.user.UserRole
 import com.example.exception.BaseException
 import com.example.exception.ErrorType
 import io.jsonwebtoken.security.Keys

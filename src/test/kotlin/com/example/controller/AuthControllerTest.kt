@@ -1,9 +1,12 @@
 package com.example.controller
 
+import com.example.common.Constants
+import com.example.common.enums.UserRole
 import com.example.config.SecurityConfig
 import com.example.controller.dto.LoginRequest
 import com.example.controller.dto.LoginResponse
 import com.example.exception.ErrorType
+import com.example.model.UserDto
 import com.example.readMvcResult
 import com.example.readMvcResultToErrorResponse
 import com.example.service.AuthService
@@ -40,8 +43,14 @@ internal class AuthControllerTest(
             name = "test",
             password = "1234"
         )
+        val user = UserDto(
+            id = 1L,
+            name = "test",
+            role = UserRole.USER
+        )
 
-        every { authService.createAccessToken(any(), any()) } returns "accessToken"
+        every { authService.login(any(), any()) } returns user
+        every { authService.createAccessToken(any()) } returns "accessToken"
 
         When("로그인에 성공하면") {
             val mvcResult = mockMvc.perform(
@@ -54,10 +63,15 @@ internal class AuthControllerTest(
                 .andExpect(status().isOk)
                 .andReturn()
 
-            Then("로그인 성공 응답을 반환한다.") {
-                val actual = objectMapper.readMvcResult(mvcResult, LoginResponse::class.java)
+            val actual = objectMapper.readMvcResult(mvcResult, LoginResponse::class.java)
 
-                actual.accessToken shouldBe "accessToken"
+            Then("로그인 성공 응답을 반환한다.") {
+                val expected = LoginResponse(
+                    user = LoginResponse.User.from(user),
+                    accessToken = "accessToken",
+                    accessTokenType = Constants.AUTH_ACCESS_TOKEN_TYPE,
+                )
+                actual shouldBe expected
             }
 
         }

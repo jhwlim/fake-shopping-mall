@@ -1,5 +1,6 @@
 package com.example.controller
 
+import com.example.common.Constants
 import com.example.controller.dto.LoginRequest
 import com.example.controller.dto.LoginResponse
 import com.example.service.AuthService
@@ -18,9 +19,12 @@ class AuthController(
     @PostMapping("/login")
     fun login(@RequestBody request: LoginRequest): LoginResponse {
         log.info { "[POST, /login] request : $request" }
-        val accessToken = authService.createAccessToken(request.name, request.password)
+        val user = authService.login(request.name, request.password)
+        val accessToken = authService.createAccessToken(user)
         return LoginResponse(
-            accessToken = accessToken
+            user = LoginResponse.User.from(user),
+            accessToken = accessToken,
+            accessTokenType = Constants.AUTH_ACCESS_TOKEN_TYPE,
         )
     }
 

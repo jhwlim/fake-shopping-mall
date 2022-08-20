@@ -1,4 +1,4 @@
-package com.example.domain.user
+package com.example.common.enums
 
 enum class UserRole {
     USER

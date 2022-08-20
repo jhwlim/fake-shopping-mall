@@ -1,5 +1,6 @@
 package com.example.domain.user
 
+import com.example.common.enums.UserRole
 import com.example.domain.BaseEntity
 import javax.persistence.*
 
