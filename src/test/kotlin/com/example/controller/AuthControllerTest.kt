@@ -1,8 +1,8 @@
 package com.example.controller
 
+import com.example.TestSecurityConfig
 import com.example.common.Constants
 import com.example.common.enums.UserRole
-import com.example.config.SecurityConfig
 import com.example.controller.dto.LoginRequest
 import com.example.controller.dto.LoginResponse
 import com.example.exception.ErrorType
@@ -19,16 +19,16 @@ import io.mockk.every
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
-@Import(SecurityConfig::class)
 @WebMvcTest(AuthController::class)
 @AutoConfigureMockMvc
+@ContextConfiguration(classes = [TestSecurityConfig::class])
 internal class AuthControllerTest(
     @Autowired
     val mockMvc: MockMvc,
